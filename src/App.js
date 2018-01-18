@@ -5,7 +5,6 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 
 import "bootstrap/dist/css/bootstrap.css";
-import { Navbar, NavItem, Nav, Grid, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   render() {

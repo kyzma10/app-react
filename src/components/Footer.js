@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import "bootstrap/dist/css/bootstrap.css";
-import { Navbar, NavItem, Nav, Grid, Row, Col, Panel } from "react-bootstrap";
 
 class Footer extends Component {
   render() {
