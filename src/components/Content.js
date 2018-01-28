@@ -6,43 +6,43 @@ import { Grid, Row, Col, Button } from "react-bootstrap";
 class Content extends Component {
   constructor(props) {
     super(props);
-    this.state = {items: [], value: ''};
+    this.state = {items: [], inputValue: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
-  addItem(event) {
-		this.state.items.push(this.state.value);
-		this.setState({items: this.state.items});
+  addItem(e) {
+    e.preventDefault();
+    const newItem = {
+      text: this.state.inputValue,
+      id: Date.now()
+    }
+    this.setState({
+      items: [...this.state.items, newItem],
+      inputValue: ''
+    })
 	}
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange(e) {
+    this.setState({
+      inputValue: e.target.value
+    });
   }
 
-  delItem(item){
-     const newItems = this.state.items.slice();
-     if (newItems.indexOf(item) > -1) {
-       newItems.splice(newItems.indexOf(item), 1);
-       this.setState({items: newItems})
-     }
+  delItem(id){
+     this.setState(prevState => ({
+       items: prevState.items.filter(items => items.id !== id)
+     }))
    }
 
   render() {
-
-    const list = this.state.items.map((item, index) => {
-		  return <li key={index}><span className="input-text">{item}</span>
-        <span>
-          <Button id={index} bsStyle="danger" bsSize="small" onClick={this.delItem.bind(this, item)}>
-            Delete
-          </Button>
-        </span></li>;
-		   });
     return(
       <div className="content">
         <Grid>
           <Row className="show-grid">
             <Col md={8}>
             <h3 className="text-block">
-              Input something, pleas, and click button save.
+              Input something, please, and click button save.
             </h3>
             </Col>
           </Row>
@@ -50,13 +50,13 @@ class Content extends Component {
             <Col md={3}>
               <input
               className='test-input'
-              value={this.state.value}
-              onChange={this.handleChange.bind(this)}
+              value={this.state.inputValue}
+              onChange={this.handleChange}
               placeholder='Input value'
               />
             </Col>
             <Col md={3}>
-              <Button bsStyle="primary" block onClick={this.addItem.bind(this)}>
+              <Button bsStyle="primary" block onClick={this.addItem}>
                 Save
               </Button>
             </Col>
@@ -72,8 +72,20 @@ class Content extends Component {
         </Row>
         <Row>
         <Col md={8}>
-          <ul>
-            {list}
+          <ul className="input-data">
+            {
+              this.state.items.length > 0 ? (
+              this.state.items.map((item) => (
+                <li key={item.id}>{item.text}
+                <Button id={item.id} bsStyle="danger" bsSize="small" onClick={()=> this.delItem(item.id)}>
+                  Delete
+                </Button>
+                </li>)
+                )
+              ) : (
+                <div><h3>No input data!!!</h3></div>
+              )
+            }
           </ul>
         </Col>
         </Row>

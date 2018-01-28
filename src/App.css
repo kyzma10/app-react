@@ -31,15 +31,40 @@
   to { transform: rotate(360deg); }
 }
 
+input {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.input-data {
+  text-align: left;
+}
+
+.input-data li {
+  text-align: justify;
+  margin-right: 40px;
+}
+
+.input-data button {
+  float: right;
+  margin-right: 40px;
+}
+
 .footer {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    margin-top: 100px;
-    color: #333;
-    text-align: center;
-    border-top: 1px solid #e5e5e5;
-    flex: 0 0 auto;
-    background-color: #f8f8f8;
+  height: 70px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #333;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+  flex: 0 0 auto;
+  background-color: #f8f8f8;
+}
+
+.copyright {
+  float: left;
+  margin-left: 50px;
 }
 
 .content {
